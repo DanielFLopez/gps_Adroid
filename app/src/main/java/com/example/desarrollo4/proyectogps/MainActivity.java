@@ -1,6 +1,7 @@
 package com.example.desarrollo4.proyectogps;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
             broadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    textView.append("\n" + intent.getExtras().get("coordinates"));
-                    String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-                    Modelo record = new Modelo("record1", mydate, Float.parseFloat(intent.getExtras().get("longitud").toString()),
-                            Float.parseFloat(intent.getExtras().get("latitud").toString()));
+                    @SuppressLint({"NewApi", "LocalSuppress"}) String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                    Modelo record = new Modelo("record1", mydate, 11.22121215484, 12.127894615475);
+                    record.save();
+                    textView.append("\n" + intent.getExtras().get("longitud") + " " + intent.getExtras().get("latitud") + " " + record.fecha);
                 }
             };
         }
@@ -83,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
             public  void  onClick(View view){
                 Intent i = new Intent(getApplicationContext(), GPS_Service.class);
                 stopService(i);
-                Modelo m = Modelo.findById(Modelo.class, 1);
-                textView.setText(m.getNombre() + " " + m.getFecha() + " " + m .getLongitud() + " " + m.getLongitud());
+                Modelo m = Modelo.findById(Modelo.class, 3);
+                textView.setText(m.fecha + " " + m.nombre + " " + m.getLongitud());
             }
         });
     }

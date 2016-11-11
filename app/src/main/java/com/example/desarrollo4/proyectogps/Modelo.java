@@ -1,6 +1,11 @@
 package com.example.desarrollo4.proyectogps;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.orm.SugarRecord;
+
+import java.util.ArrayList;
 
 /**
  * Created by desarrollo4 on 11/11/16.
@@ -9,13 +14,12 @@ import com.orm.SugarRecord;
 public class Modelo extends SugarRecord {
 
     String nombre, fecha;
-    float longitud, latitud;
+    double longitud, latitud;
 
     public Modelo(){
-
     }
 
-    public Modelo(String nombre, String fecha, float longitud, float latitud){
+    public Modelo(String nombre, String fecha, double longitud, double latitud){
         this.nombre = nombre;
         this.fecha = fecha;
         this.longitud = longitud;
@@ -30,12 +34,11 @@ public class Modelo extends SugarRecord {
         return fecha;
     }
 
-    public float getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
-    public float getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
-
 }
